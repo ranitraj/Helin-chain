@@ -26,6 +26,13 @@ $ cd client
 $ npm start
   Starting the development server...
 ```
+If it does not work this way then first try these commands to build truffle
+
+```sh
+$ cd truffle
+$ truffle compile
+$ truffe migrate
+```
 
 From there, follow the instructions on the hosted React app. It will walk you through using Truffle and Ganache to deploy the `SimpleStorage` contract, making calls to it, and sending transactions to change the contract's state.
 

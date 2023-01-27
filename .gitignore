@@ -32,4 +32,4 @@ yarn-debug.log*
 yarn-error.log*
 
 #json file
-package-lock.json
+package-lock.json*

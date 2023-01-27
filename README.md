@@ -24,10 +24,14 @@ Start the react dev server.
 
 ```sh
 $ cd client
+# Remove the package-lock.json file if it's already there
+$ npm install
 $ npm start
   Starting the development server...
 ```
-If it does not work this way then first try these commands to build truffle
+If it does not work this way then first try these commands to build truffle.
+
+Make sure truffle version is : Truffle v5.7.4 (core: 5.7.4).
 
 ```sh
 $ cd truffle

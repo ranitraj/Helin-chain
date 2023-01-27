@@ -8,6 +8,7 @@ First ensure you are in an empty directory.
 
 Run the `unbox` command using 1 of 2 ways.
 
+Only if you want to create a new dapp follow the next two commands else leave.
 ```sh
 # Install Truffle globally and run `truffle unbox`
 $ npm install -g truffle

@@ -12,12 +12,6 @@ Only if you want to create a new dapp follow the next two commands else leave.
 ```sh
 # Install Truffle globally and run `truffle unbox`
 $ npm install -g truffle
-$ truffle unbox react
-```
-
-```sh
-# Alternatively, run `truffle unbox` via npx
-$ npx truffle unbox react
 ```
 
 Start the react dev server.

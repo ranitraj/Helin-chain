@@ -14,18 +14,19 @@ contract SimpleStorage {
 }
 
 contract Helin {
+
   struct Hospital{
-  address hospitalId;
-  string hospitalName;
-  uint128 departmentId;
-  string departmentName;
+    address hospitalId;
+    bytes32 hospitalName;
+    uint128 departmentId;
+    bytes32 departmentName;
 }
 
-  struct Insuarance {
-  address insuaranceId;
-  uint128 policyId;
-  string insuaranceName;
-  string policyName;
+  struct Insurance {
+    address insuranceId;
+    uint128 policyId;
+    bytes32 insuranceName;
+    bytes32 policyName;
 }
 
   struct Bill {
@@ -37,8 +38,8 @@ contract Helin {
 
   struct Patient {
     address patientId;
-    string patientName;
-    Insuarance[] insuarances;
+    bytes32 patientName;
+    Insurance[] insurances;
     Bill[] bills;
   }
 
@@ -46,13 +47,13 @@ contract Helin {
   mapping (address => Patient) public patients;
   mapping (address => Bill) public bills;
   mapping (address => Hospital) public hospitals;
-  mapping (address => Insuarance) public insuarances;
+  mapping (address => Insurance) public insurances;
 
   event PatientAdded(address patientId);
-  event InsuaranceAdded(address insuaranceId);
+  event InsuranceAdded(address insuranceId);
   event HospitalAdded(address hospitalId);
   event BillAdded(address patientId);
-  event InsuaranceAdded(address insuaranceId, address patientId);
+  event InsuranceAdded(address insuranceId, address patientId);
 
 
   modifier senderExists {
@@ -60,8 +61,8 @@ contract Helin {
     _;
   }
 
-  modifier senderIsInsuarance {
-    require(insuarances[msg.sender].insuaranceId == msg.sender, "Sender is not a an Insuarance");
+  modifier senderIsInsurance {
+    require(insurances[msg.sender].insuranceId == msg.sender, "Sender is not a an Insurance");
     _;
   }
 
@@ -81,10 +82,10 @@ contract Helin {
     emit PatientAdded(_patientId);
   }
 
-  function addInsuarance(address _insuaranceId) public senderIsPatient {
-    require(insuarances[_insuaranceId].insuaranceId != _insuaranceId, "This insuarance already exists.");
-    insuarances[_insuaranceId].insuaranceId = _insuaranceId;
-    emit InsuaranceAdded(_insuaranceId);
+  function addInsurance(address _insuranceId) public senderIsPatient {
+    require(insurances[_insuranceId].insuranceId != _insuranceId, "This insurance already exists.");
+    insurances[_insuranceId].insuranceId = _insuranceId;
+    emit InsuranceAdded(_insuranceId);
   }
 
   function addHospital(address _hospitalId) public {
@@ -98,9 +99,9 @@ contract Helin {
     emit BillAdded(_patientId);
   }
 
-  function addInsuaranceToPatient(address _patientId, address _insuaranceId) public senderIsHospital {
-    patients[_patientId].insuarances.push(insuarances[_insuaranceId]);
-    emit InsuaranceAdded(_insuaranceId, _patientId);
+  function addInsuranceToPatient(address _patientId, address _insuranceId) public senderIsHospital {
+    patients[_patientId].insurances.push(insurances[_insuranceId]);
+    emit InsuranceAdded(_insuranceId, _patientId);
   }
 
   function getSenderRole() public view returns (string memory) {
@@ -109,8 +110,8 @@ contract Helin {
     } else if (patients[msg.sender].patientId == msg.sender) {
       return "patient";
     }
-    else if (insuarances[msg.sender].insuaranceId == msg.sender) {
-      return "insuarance";
+    else if (insurances[msg.sender].insuranceId == msg.sender) {
+      return "insurance";
     } else {
       return "unknown";
     }

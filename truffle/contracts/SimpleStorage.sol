@@ -19,7 +19,7 @@ contract Helin {
   string hospitalName;
   uint128 departmentId;
   string departmentName;
-  }
+}
 
   struct Insuarance {
   address insuaranceId;
